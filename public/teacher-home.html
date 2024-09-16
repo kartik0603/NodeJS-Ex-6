@@ -6,62 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Teacher Home</title>
   <link rel="stylesheet" href="style.registration.css">
-
 </head>
 
 <body>
   <div class="container">
     <div class="title">Teacher Home</div>
-    <input type="text" id="search" placeholder="Search students by name" oninput="filterStudents()">
-    <button onclick="sortStudents()">Sort Students A-Z</button>
+    <input type="text" id="search" placeholder="Search students by name">
+    <button id="sortButton">Sort Students A-Z</button>
     <div id="studentList"></div>
-    <button onclick="logout()">Logout</button>
+    <button id="logoutButton">Logout</button>
   </div>
 
-  <script>
-    const email = localStorage.getItem('email');
-    if (!email) {
-      window.location.href = '/public/signIN.html';
-    }
-
-    let students = [];
-
-    function renderStudents(filteredStudents) {
-      const studentList = document.getElementById('studentList');
-      studentList.innerHTML = '';
-      filteredStudents.forEach(student => {
-        const p = document.createElement('p');
-        p.innerText = `${student.fullName} - ${student.gender}`;
-        studentList.appendChild(p);
-      });
-    }
-
-    function filterStudents() {
-      const search = document.getElementById('search').value.toLowerCase();
-      const filtered = students.filter(student =>
-        student.fullName.toLowerCase().includes(search)
-      );
-      renderStudents(filtered);
-    }
-
-    function sortStudents() {
-      const sorted = [...students].sort((a, b) => a.fullName.localeCompare(b.fullName));
-      renderStudents(sorted);
-    }
-
-    fetch('/students')
-      .then(response => response.json())
-      .then(data => {
-        students = data;
-        renderStudents(students);
-      });
-
-    function logout() {
-      localStorage.removeItem('role');
-      localStorage.removeItem('email');
-      window.location.href = '/views/signIN.html';
-    }
-  </script>
+  <script src="./script.js"></script>
 </body>
 
 </html>
