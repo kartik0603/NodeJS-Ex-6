@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Home</title>
+  <link rel="stylesheet" href="style.registration.css">
+
+</head>
+<body>
+  <div class="container">
+    <div class="title">Student Home</div>
+    <p id="studentDetails"></p>
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <script>
+    const email = localStorage.getItem('email');
+    if (!email) {
+      window.location.href = '/public/signIN.html';
+    } else {
+      document.getElementById('studentDetails').innerText = `Logged in as:  ${email} `;
+    }
+
+  const logout=()=> {
+      localStorage.removeItem('role');
+      localStorage.removeItem('email');
+      window.location.href = '/public/signIN.html';
+    }
+  </script>
+</body>
+</html>
